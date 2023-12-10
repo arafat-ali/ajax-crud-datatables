@@ -104,31 +104,12 @@
 <script>
 
     window.onload = function(){
-        getRoles();
+        getRoles('role_id');
     }
 
     $(function () {
-
-        var table = $('#user_table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('user-list') }}",
-            columns: [
-                {data: 'id', name: 'ID'},
-                {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
-                {data: 'address', name: 'Address'},
-                {data: 'role.name', name: 'Role Id'},
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                },
-            ]
-        });
-
-  });
+        userList()
+    });
 
 </script>
 @endsection

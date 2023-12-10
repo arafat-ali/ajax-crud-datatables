@@ -30,9 +30,6 @@
     <div class="form-group">
         <label for="roleId">Role</label>
         <select class="form-control" id="role_id" name="roleId">
-          <option value="1">Super Admin</option>
-          <option value="2">Admin</option>
-          <option value="3">Employee</option>
         </select>
         <span id="roli_idError" class="error"><span>
       </div>
