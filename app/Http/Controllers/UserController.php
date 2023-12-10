@@ -46,8 +46,8 @@ class UserController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $actionBtn =
-                    '<a href="#editEmployeeModal" class="btn btn-success btn-sm" data-toggle="modal" onclick=showUser("' . $row->id .'")>Edit</a>
-                    <a href="#deleteEmployeeModal" class="m-1 delete btn btn-danger btn-sm" data-toggle="modal" onclick=$("#delete_id").val("' . $row->id .'")>Delete</a>';
+                    '<a href="#editUserModal" class="btn btn-success btn-sm" data-toggle="modal" onclick=showUser("' . $row->id .'")>Edit</a>
+                    <a href="#deleteUserModal" class="m-1 delete btn btn-danger btn-sm" data-toggle="modal" onclick=deleteConfirm("' . $row->id .'")>Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -66,6 +66,17 @@ class UserController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User successfully updated',
+            ], 200);
+        }
+    }
+
+
+    public function delete($id){
+        $user = User::find($id)->delete();
+        if($user){
+            return response()->json([
+                'status' => true,
+                'message' => 'User deleted updated',
             ], 200);
         }
     }

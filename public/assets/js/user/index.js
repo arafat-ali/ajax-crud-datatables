@@ -135,7 +135,7 @@ function updateUser(){
                 icon: "success"
             });
             //close modal
-            closeModal('editEmployeeModal');
+            closeModal('editUserModal');
             //reload datatables data
             userList()
 
@@ -154,3 +154,43 @@ function updateUser(){
 function closeModal (el){
     $(`#${el}`).modal('toggle');
 }
+
+
+function deleteConfirm(id){
+    axios.get(`${baseurl}user/${id}`)
+    .then((response)=>{
+        if(response.status == 200){
+            data = response.data.data;
+            //assigning value to the form
+            $("#deleted_user_name").text(data.name)
+            $("#deleted_user_id").val(data.id)
+        }
+    }).catch((error)=>{
+        console.log(error.response.data);
+    });
+}
+
+
+function deleteUser(){
+    userId = $("#deleted_user_id").val();
+    axios.delete(`${baseurl}user/${userId}`)
+    .then((response)=>{
+        if(response.status == 200){
+            data = response.data.data;
+            Swal.fire({
+                title: "Success",
+                text: response.data.message,
+                icon: "success"
+            });
+            //close modal
+            closeModal('deleteUserModal');
+            //reload datatables data
+            userList()
+        }
+    }).catch((error)=>{
+        console.log(error.response.data);
+    });
+
+}
+
+

@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('roles', [RoleController::class , 'list'])->name('user-roles');
 
 Route::get('users', [UserController::class , 'list'])->name('user-list');
+Route::post('user', [UserController::class , 'create'])->name('create-user');
 Route::get('user/{id}', [UserController::class , 'show'])->name('user-show');
 Route::put('user/{id}', [UserController::class , 'update'])->name('user-update');
-Route::post('user', [UserController::class , 'create'])->name('create-user');
+Route::delete('user/{id}', [UserController::class , 'delete'])->name('user-delete');
