@@ -15,9 +15,11 @@ class RoleSeeder extends Seeder
     public function run()
     {
         DB::table('roles')->insert(
-            array(['name' => "Admin"],
+            array(
+                ['name' => "Admin"],
                 ['name' => "Manager"],
-                ['name' => "Customer"])
+                ['name' => "Customer"]
+            )
         );
     }
 }

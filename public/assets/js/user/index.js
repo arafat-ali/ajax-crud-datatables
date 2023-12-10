@@ -1,5 +1,31 @@
 const baseurl = 'http://127.0.0.1:8000/'
 
+function userList(){
+    if ( $.fn.dataTable.isDataTable( '#user_table' ) ) {
+        table = $('#user_table').DataTable();
+        table.destroy();
+    }
+
+    $('#user_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: `${baseurl}users`,
+        columns: [
+            {data: 'id', name: 'ID'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'address', name: 'Address'},
+            {data: 'role.name', name: 'Role Id'},
+            {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+            },
+        ]
+    });
+}
+
 function clearError(keys){
     keys.forEach((key)=>{
         $(`#${key}Error`).text('')
@@ -31,6 +57,8 @@ function create(){
                 text: response.data.message,
                 icon: "success"
             });
+            //reload datatables data
+            userList()
         }
     }).catch((error)=>{
         console.log(error.response.data);
@@ -40,33 +68,6 @@ function create(){
                 setErrorMessage(key,errors[key][0])
             });
         }
-    });
-}
-
-
-function userList(){
-    if ( $.fn.dataTable.isDataTable( '#user_table' ) ) {
-        table = $('#user_table').DataTable();
-        table.destroy();
-    }
-
-    $('#user_table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: `${baseurl}users`,
-        columns: [
-            {data: 'id', name: 'ID'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'address', name: 'Address'},
-            {data: 'role.name', name: 'Role Id'},
-            {
-                data: 'action',
-                name: 'action',
-                orderable: true,
-                searchable: true
-            },
-        ]
     });
 }
 
